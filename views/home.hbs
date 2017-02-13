@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Paytm Payment</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <h1 class="display-3">Paytm Incorporation Demo</h1>
+        <p class="lead">Following form contains the information to be sent to paytm server.</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <form class="col-sm-8 offset-md-2" action="https://pguat.paytm.com/oltp-web/processTransaction" method="post">
+                <div class="form-group">
+                    <label for="REQUEST_TYPE">REQUEST_TYPE</label>
+                    <input class="form-control" id="REQUEST_TYPE" type="text" name="REQUEST_TYPE" value="{{REQUEST_TYPE}}">
+                </div>
+                <div class="form-group">
+                    <label for="MID">MID</label>
+                    <input class="form-control" id="MID" type="text" name="MID" value="{{MID}}">
+                </div>
+                <div class="form-group">
+                    <label for="ORDER_ID">ORDER_ID</label>
+                    <input class="form-control" id="ORDER_ID" type="text" name="ORDER_ID" value="{{ORDER_ID}}">
+                </div>
+                <div class="form-group">
+                    <label for="CUST_ID">CUST_ID</label>
+                    <input class="form-control" id="CUST_ID" type="text" name="CUST_ID" value="{{CUST_ID}}">
+                </div>
+                <div class="form-group">
+                    <label for="TXN_AMOUNT">TXN_AMOUNT</label>
+                    <input class="form-control" id="TXN_AMOUNT" type="text" name="TXN_AMOUNT" value="{{TXN_AMOUNT}}">
+                </div>
+                <div class="form-group">
+                    <label for="CHANNEL_ID">CHANNEL_ID</label>
+                    <input class="form-control" id="CHANNEL_ID" type="text" name="CHANNEL_ID" value="{{CHANNEL_ID}}">
+                </div>
+                <div class="form-group">
+                    <label for="INDUSTRY_TYPE_ID">INDUSTRY_TYPE_ID</label>
+                    <input class="form-control" id="INDUSTRY_TYPE_ID" type="text" name="INDUSTRY_TYPE_ID" value="{{INDUSTRY_TYPE_ID}}">
+                </div>
+                <div class="form-group">
+                    <label for="WEBSITE">WEBSITE</label>
+                    <input class="form-control" id="WEBSITE" type="text" name="WEBSITE" value="{{WEBSITE}}">
+                </div>
+                <div class="form-group">
+                    <label for="CHECKSUMHASH">CHECKSUMHASH</label>
+                    <input class="form-control" id="CHECKSUMHASH" type="text" name="CHECKSUMHASH" value="{{CHECKSUMHASH}}" disabled>
+                </div>
+                <button type="submit" class="btn btn-primary">Pay Now</button>
+            </form>
+        </div>
+        <br>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $("form").submit(function (e) {
+            // e.preventDefault();
+            // console.log($(this).serialize());
+        });
+    </script>
+</body>
+
+</html>

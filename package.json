@@ -1,0 +1,19 @@
+{
+  "name": "paytm-inc",
+  "version": "1.0.0",
+  "description": "paytm incorporaton testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./paytm/checksum.js"
+  },
+  "keywords": [
+    "paytm"
+  ],
+  "author": "Vishnu Singh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "querystring": "^0.2.0"
+  }
+}
