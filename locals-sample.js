@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
-  KEY: '',
-  MID: ''
+    KEY: '',
+    MID: '',
+    PAYTM_RESPONSE_CALLBACK_URL: ''
 };

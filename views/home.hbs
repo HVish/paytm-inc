@@ -12,6 +12,8 @@
 
 <body>
 
+    {{> navbar}}
+
     <div class="jumbotron">
         <h1 class="display-3">Paytm Incorporation Demo</h1>
         <p class="lead">Following form contains the information to be sent to paytm server.</p>
@@ -19,44 +21,66 @@
 
     <div class="container">
         <div class="row">
-            <form class="col-sm-8 offset-md-2" action="https://pguat.paytm.com/oltp-web/processTransaction" method="post">
+            <form class="col-sm-8 offset-md-2" action="{{submitURL}}" method="post">
+
+                {{#if CHECKSUMHASH}}
+                    {{#if success}}
+                        <div class="alert alert-success" role="alert">
+                            <strong>Checksum generated</strong> click pay now button for payment.
+                        </div>
+                    {{/if}}
+                    {{#if failed}}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Checksum couldn't be generated</strong> try again.
+                        </div>
+                    {{/if}}
+                    <div class="form-group">
+                        <label for="CHECKSUMHASH">CHECKSUMHASH</label>
+                        <input class="form-control" id="CHECKSUMHASH" type="text" name="CHECKSUMHASH" value="{{CHECKSUMHASH}}" readonly>
+                    </div>
+                {{else}}
+                    <div class="form-group">
+                        <label for="KEY">MERCHANT_KEY</label>
+                        <input class="form-control" id="KEY" type="text" name="KEY" value="{{KEY}}">
+                    </div>
+                {{/if}}
                 <div class="form-group">
-                    <label for="REQUEST_TYPE">REQUEST_TYPE</label>
-                    <input class="form-control" id="REQUEST_TYPE" type="text" name="REQUEST_TYPE" value="{{REQUEST_TYPE}}">
-                </div>
-                <div class="form-group">
-                    <label for="MID">MID</label>
-                    <input class="form-control" id="MID" type="text" name="MID" value="{{MID}}">
-                </div>
-                <div class="form-group">
-                    <label for="ORDER_ID">ORDER_ID</label>
-                    <input class="form-control" id="ORDER_ID" type="text" name="ORDER_ID" value="{{ORDER_ID}}">
-                </div>
-                <div class="form-group">
-                    <label for="CUST_ID">CUST_ID</label>
-                    <input class="form-control" id="CUST_ID" type="text" name="CUST_ID" value="{{CUST_ID}}">
-                </div>
-                <div class="form-group">
-                    <label for="TXN_AMOUNT">TXN_AMOUNT</label>
-                    <input class="form-control" id="TXN_AMOUNT" type="text" name="TXN_AMOUNT" value="{{TXN_AMOUNT}}">
+                    <label for="CALLBACK_URL">CALLBACK_URL</label>
+                    <input class="form-control" id="CALLBACK_URL" type="text" name="CALLBACK_URL" value="{{CALLBACK_URL}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
                 </div>
                 <div class="form-group">
                     <label for="CHANNEL_ID">CHANNEL_ID</label>
-                    <input class="form-control" id="CHANNEL_ID" type="text" name="CHANNEL_ID" value="{{CHANNEL_ID}}">
+                    <input class="form-control" id="CHANNEL_ID" type="text" name="CHANNEL_ID" value="{{CHANNEL_ID}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
+                </div>
+                <div class="form-group">
+                    <label for="CUST_ID">CUST_ID</label>
+                    <input class="form-control" id="CUST_ID" type="text" name="CUST_ID" value="{{CUST_ID}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
                 </div>
                 <div class="form-group">
                     <label for="INDUSTRY_TYPE_ID">INDUSTRY_TYPE_ID</label>
-                    <input class="form-control" id="INDUSTRY_TYPE_ID" type="text" name="INDUSTRY_TYPE_ID" value="{{INDUSTRY_TYPE_ID}}">
+                    <input class="form-control" id="INDUSTRY_TYPE_ID" type="text" name="INDUSTRY_TYPE_ID" value="{{INDUSTRY_TYPE_ID}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
+                </div>
+                <div class="form-group">
+                    <label for="MID">MID</label>
+                    <input class="form-control" id="MID" type="text" name="MID" value="{{MID}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
+                </div>
+                <div class="form-group">
+                    <label for="ORDER_ID">ORDER_ID</label>
+                    <input class="form-control" id="ORDER_ID" type="text" name="ORDER_ID" value="{{ORDER_ID}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
+                </div>
+                <div class="form-group">
+                    <label for="REQUEST_TYPE">REQUEST_TYPE</label>
+                    <input class="form-control" id="REQUEST_TYPE" type="text" name="REQUEST_TYPE" value="{{REQUEST_TYPE}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
+                </div>
+                <div class="form-group">
+                    <label for="TXN_AMOUNT">TXN_AMOUNT</label>
+                    <input class="form-control" id="TXN_AMOUNT" type="text" name="TXN_AMOUNT" value="{{TXN_AMOUNT}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
                 </div>
                 <div class="form-group">
                     <label for="WEBSITE">WEBSITE</label>
-                    <input class="form-control" id="WEBSITE" type="text" name="WEBSITE" value="{{WEBSITE}}">
+                    <input class="form-control" id="WEBSITE" type="text" name="WEBSITE" value="{{WEBSITE}}" {{#if CHECKSUMHASH}} readonly {{/if}}>
                 </div>
-                <div class="form-group">
-                    <label for="CHECKSUMHASH">CHECKSUMHASH</label>
-                    <input class="form-control" id="CHECKSUMHASH" type="text" name="CHECKSUMHASH" value="{{CHECKSUMHASH}}" disabled>
-                </div>
-                <button type="submit" class="btn btn-primary">Pay Now</button>
+                <button type="submit" class="btn btn-primary"> {{#if CHECKSUMHASH}}Pay Now{{else}}Generate Checksum{{/if}}</button>
             </form>
         </div>
         <br>
@@ -66,7 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        $("form").submit(function (e) {
+        $("form").submit(function(e) {
             // e.preventDefault();
             // console.log($(this).serialize());
         });

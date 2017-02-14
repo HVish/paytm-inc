@@ -12,6 +12,7 @@
   "author": "Vishnu Singh",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "express-handlebars": "^3.0.0",
     "querystring": "^0.2.0"
